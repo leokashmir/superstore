@@ -19,6 +19,7 @@ npm run build --report
 ```
  ## API SERVER
 - Create the folder api-server
+  - mkdir api_folder 
 	- Cd api_folder
 	- npm Init (Enter all options)
 	- npm express cors --save
