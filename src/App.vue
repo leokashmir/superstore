@@ -4,7 +4,8 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-9">
-          <Inventory @newItemAdded="addCartItem" :items="items"></Inventory>
+          <router-view></router-view>
+          <!-- <Inventory @newItemAdded="addCartItem" :items="items"></Inventory> -->
         </div>
 
         <div class="col-sm-3">
@@ -18,14 +19,14 @@
 <script>
 import Navbar from "./components/NavBar";
 import Cart from "./components/Cart";
-import Inventory from "./components/Inventory";
+import Inventory from "./components/views/Inventory";
 import data from './data.js'
 
 export default {
   components: {
     Navbar,
     Cart,
-    Inventory
+    //Inventory
   },
   data(){
       return {
