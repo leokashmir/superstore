@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Super Store</a>
+    <router-link class="navbar-brand" :to="{path:'/'}">Super Store</router-link>
     <button
       class="navbar-toggler"
       type="button"
@@ -25,6 +25,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   data(){
       return{
@@ -33,7 +35,9 @@ export default {
   },
   methods:{
     search(){
-        this.$emit('search', this.keyword)
+        axios.get('http://localhost:3000/search/' + this.keyword ).then(response =>{
+             this.$emit('search', response.data)
+        })
     }
   }
 };

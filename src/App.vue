@@ -39,11 +39,17 @@ export default {
   },
   methods:{
 
-     search(keyword){
-     this.items =  data.filter(item => {
-        return  item.title.toLowerCase().indexOf(keyword.toLowerCase()) !== -1
-      })
-     },
+    //  search(keyword){
+    //  this.items =  data.filter(item => {
+    //     return  item.title.toLowerCase().indexOf(keyword.toLowerCase()) !== -1
+    //   })
+    //  },
+
+      search(dataItens){
+        console.log(dataItens)
+         this.items = dataItens;
+      },
+
     addCartItem(item){
       this.cart.push(item)
     },
