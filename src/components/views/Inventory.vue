@@ -14,7 +14,7 @@
       
        <div class="card-footer">
         <p class="card-text" >${{item.price}}</p>
-        <a @click="addCart(item)" class="btn btn-sm  btn-primary float-right">+add</a>
+        <a @click="addToCart(item)" class="btn btn-sm  btn-primary float-right">+add</a>
       </div>
     </div>
    
@@ -33,7 +33,12 @@ export default {
 data(){
   return{
     loading: true,
-    items:[]
+   
+  }
+},
+computed:{
+  items() {
+      return this.$store.getters.getInventory
   }
 },
 mounted(){
@@ -41,15 +46,18 @@ mounted(){
   this.fetchInventory();
 },
  methods:{
-     addCart(item){
-         this.$emit('newItemAdded', item)   
+     addToCart(item){
+         this.$store.dispatch('addToCart' , item)
+        //  this.$store.commit('addToCart' , item)
+        // this.$emit('newItemAdded', item)   
+        
      },
      fetchInventory(){
       var self = this
        
        axios.get('http://localhost:3000/items').then(response =>{
-           self.items = response.data,
-            self.loading = false
+           self.$store.commit('setInventory', response.data)
+           self.loading = false
         }).catch( () => {alert('erro acessando o Servidor')})
      }
  }

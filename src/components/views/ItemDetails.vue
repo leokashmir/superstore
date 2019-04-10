@@ -1,12 +1,17 @@
 <template>
-   <div class="row">
+   <div v-if="item" class="row">
        <div class="col-sm-6">
            <img :src="item.photo" alt="photo">
        </div>
         <div class="col-sm-6">
            <h4>{{item.title}}</h4>
            <p>{{item.description}}</p>
-           <p>{{item.price}}</p>
+           
+          <div class="card-footer">
+           <spam>${{item.price}}</spam>
+           <a @click="addToCart(item)" class="btn btn-sm  btn-primary float-right">+add</a>
+          </div>
+       
        </div>
 
    </div>
@@ -25,9 +30,13 @@ export default {
            this.fetchItem();
         },
         methods:{
+
+            addToCart(item){
+                this.$store.commit('addToCart' , item)
+            },
             fetchItem(){
                 var self = this;
-                    axios.get('http://localhost:3000/item/' + this.$route.params.id).then(response=>{
+                    axios.get('http://localhost:3000/item/' + this.$route.params.id).then(response => {
                            self.item = response.data 
                     })
             }

@@ -20,6 +20,9 @@
         <span class="item-name">Total</span>
         <span class="item-price float-right">${{totalPrice}}</span>
    </li>
+    <li v-if="items.length > 0" class="list-group-item">
+         <button class="btn btn-block btn-success" @click="checkout">Checkout</button>
+   </li>
   </ul>
 </template>
 
@@ -27,20 +30,30 @@
 
 <script>
 export default {
-  props:['items'],
+
   computed:{
-        totalPrice(){
+
+    items(){
+        return this.$store.getters.getCart
+    },
+     totalPrice(){
             var total = 0
             this.items.forEach(item => {
                 total += parseFloat(item.price)
                 
             })
-            return total;
+            return total.toFixed(2); // Para duas casas decimais
         }
   },
   methods:{
       removeItem(index){
-          this.$emit('itemRemoved', index)
+           this.$store.commit('removeItem' , index)
+          //this.$emit('itemRemoved', index)
+      },
+      checkout(){
+          if(confirm('Tem certeza que você quer fazer o Checkout?')){
+              this.$store.commit('clearCart')
+          }
       }
   }
 };

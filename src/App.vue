@@ -1,15 +1,15 @@
 <template>
   <div id="app">
-    <Navbar @search="search"></Navbar>
+    <Navbar></Navbar>
     <div class="container">
       <div class="row">
         <div class="col-sm-9">
           <router-view></router-view>
-          <!-- <Inventory @newItemAdded="addCartItem" :items="items"></Inventory> -->
+        
         </div>
 
         <div class="col-sm-3">
-          <Cart @itemRemoved="removeItem" :items="cart"></Cart>
+          <Cart></Cart>
         </div>
       </div>
     </div>
@@ -25,38 +25,18 @@ import data from './data.js'
 export default {
   components: {
     Navbar,
-    Cart,
-    //Inventory
+    Cart
+   
   },
   data(){
       return {
-        items:[],
-        cart:[]
+       
       }
   },
   mounted(){
-    this.items = data
+   
   },
   methods:{
-
-    //  search(keyword){
-    //  this.items =  data.filter(item => {
-    //     return  item.title.toLowerCase().indexOf(keyword.toLowerCase()) !== -1
-    //   })
-    //  },
-
-      search(dataItens){
-        console.log(dataItens)
-         this.items = dataItens;
-      },
-
-    addCartItem(item){
-      this.cart.push(item)
-    },
-    removeItem(index){
-     this.cart.splice(index, 1)
-   },
-  
    
    }
   
